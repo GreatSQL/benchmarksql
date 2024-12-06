@@ -1,2 +1,4 @@
 build
 dist
+run/bmsql-mon.sh
+run/bmsql-run.sh
