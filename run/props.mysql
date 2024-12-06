@@ -36,4 +36,4 @@ stockLevelWeight=4
 // osCollectorInterval=0
 // osCollectorSSHAddr=user@dbhost
 // osCollectorDevices=net_em1 blk_md127
-resultDirectory=./mysql/ibp-256g-notlb
+resultDirectory=./mysql
