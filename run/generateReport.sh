@@ -1,4 +1,11 @@
 #!/bin/sh
+#
+# Usage example:
+#
+# for d in `find ./mysql-* ./greatsql-* -name 2025* -type d`; do echo $d; ./generateReport.sh ./$d; done
+# 
+
+WORKDIR=/usr/local/benchmarksql/run
 
 if [ $# -ne 1 ] ; then
     echo "usage: $(basename $0) RESULT_DIR" >&2
@@ -33,7 +40,7 @@ function getProp()
     grep "^${1}=" run.properties | sed -e "s/^${1}=//"
 }
 
-./generateGraphs.sh "${1}"
+${WORKDIR}/generateGraphs.sh "${1}"
 cd "${1}"
 echo -n "Generating ${1}/report.html ... "
 

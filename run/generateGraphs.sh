@@ -6,6 +6,8 @@
 # Copyright (C) 2016, Jan Wieck
 # ----
 
+WORKDIR=/usr/local/benchmarksql/run
+
 if [ $# -lt 1 ] ; then
     echo "usage: $(basename $0) RESULT_DIR [...]" >&2
     exit 2
@@ -22,7 +24,7 @@ for resdir in $* ; do
     for graph in $SIMPLE_GRAPHS ; do
 	echo -n "Generating ${resdir}/${graph}.png ... "
 	out=$(sed -e "s/@WIDTH@/${WIDTH}/g" -e "s/@HEIGHT@/${HEIGHT}/g" \
-		  <../misc/${graph}.R | R --no-save)
+		  <${WORKDIR}/misc/${graph}.R | R --no-save)
 	if [ $? -ne 0 ] ; then
 	    echo "ERROR"
 	    echo "$out" >&2
@@ -39,7 +41,7 @@ for resdir in $* ; do
 
 	echo -n "Generating ${resdir}/${devname}_iops.png ... "
 	out=$(sed -e "s/@WIDTH@/${WIDTH}/g" -e "s/@HEIGHT@/${HEIGHT}/g" \
-		  -e "s/@DEVICE@/${devname}/g" <../misc/blk_device_iops.R | R --no-save)
+		  -e "s/@DEVICE@/${devname}/g" <${WORKDIR}/misc/blk_device_iops.R | R --no-save)
 	if [ $? -ne 0 ] ; then
 	    echo "ERROR"
 	    echo "$out" >&2
@@ -49,7 +51,7 @@ for resdir in $* ; do
 
 	echo -n "Generating ${resdir}/${devname}_kbps.png ... "
 	out=$(sed -e "s/@WIDTH@/${WIDTH}/g" -e "s/@HEIGHT@/${HEIGHT}/g" \
-		  -e "s/@DEVICE@/${devname}/g" <../misc/blk_device_kbps.R | R --no-save)
+		  -e "s/@DEVICE@/${devname}/g" <${WORKDIR}/misc/blk_device_kbps.R | R --no-save)
 	if [ $? -ne 0 ] ; then
 	    echo "ERROR"
 	    echo "$out" >&2
@@ -66,7 +68,7 @@ for resdir in $* ; do
 
 	echo -n "Generating ${resdir}/${devname}_iops.png ... "
 	out=$(sed -e "s/@WIDTH@/${WIDTH}/g" -e "s/@HEIGHT@/${HEIGHT}/g" \
-		  -e "s/@DEVICE@/${devname}/g" <../misc/net_device_iops.R | R --no-save)
+		  -e "s/@DEVICE@/${devname}/g" <${WORKDIR}/misc/net_device_iops.R | R --no-save)
 	if [ $? -ne 0 ] ; then
 	    echo "ERROR"
 	    echo "$out" >&2
@@ -76,7 +78,7 @@ for resdir in $* ; do
 
 	echo -n "Generating ${resdir}/${devname}_kbps.png ... "
 	out=$(sed -e "s/@WIDTH@/${WIDTH}/g" -e "s/@HEIGHT@/${HEIGHT}/g" \
-		  -e "s/@DEVICE@/${devname}/g" <../misc/net_device_kbps.R | R --no-save)
+		  -e "s/@DEVICE@/${devname}/g" <${WORKDIR}/misc/net_device_kbps.R | R --no-save)
 	if [ $? -ne 0 ] ; then
 	    echo "ERROR"
 	    echo "$out" >&2
